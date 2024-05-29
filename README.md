@@ -5,13 +5,13 @@ This project aims to retrieve data from my personal Facebook page, including fri
 ##Usage
 
 - **Selenium**
-  - [GitHub Repository](https://github.com/SeleniumHQ/seleniumhq.github.io)
+  - [Selenium](https://github.com/SeleniumHQ/seleniumhq.github.io)
   
 - **Scrapy**
-  - [GitHub Repository](https://github.com/scrapy/scrapy)
+  - [Scrapy](https://github.com/scrapy/scrapy)
   
 - **Scrapyd**
-  - [GitHub Repository](https://github.com/scrapy/scrapyd)
+  - [Scrapyd](https://github.com/scrapy/scrapyd)
   
 - **Scrapyweb**
-  - [GitHub Repository](https://github.com/igaotang/scrapyweb)
+  - [Scrapyweb](https://github.com/igaotang/scrapyweb)
