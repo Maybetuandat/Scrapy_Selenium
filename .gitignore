@@ -1,0 +1,8 @@
+build
+dbs
+eggs
+logs
+project.egg-info
+chromedriver.exe
+msedgedriver.exe
+__pycache__

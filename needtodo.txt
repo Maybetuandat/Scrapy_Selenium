@@ -1,0 +1,1 @@
+phân giải tên miền, chuyển từ link thành facebook id -> load trang đó xong bỏ vào biến page_source -> xong find my userid
