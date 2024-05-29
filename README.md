@@ -1,6 +1,6 @@
 # Project Overview
 
-This project aims to retrieve data from my personal Facebook page, including friend IDs and a list of people who interact with posts shared on my personal page.
+This project aims to retrieve data from my personal Facebook page, including friend id and a list of people who interact with posts shared on my personal page.
 
 ## Usage
 
