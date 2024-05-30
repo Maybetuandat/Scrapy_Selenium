@@ -3,5 +3,10 @@
 pip install scrapyd
 scrapyd
 pip install git+https://github.com/scrapy/scrapyd-client.git
+
+
+
+
+scrapyd-deploy local
 curl http://localhost:6800/schedule.json -d project=crawl_facebook -d spider=facebook
 curl http://localhost:6800/cancel.json -d project=crawl_facebook -d job = "id_job"

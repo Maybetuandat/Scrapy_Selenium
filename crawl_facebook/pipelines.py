@@ -47,19 +47,29 @@ class CrawlFacebookPipeline:
         edge_options.add_argument("--headless")
         edge_options.add_argument("--disable-gpu") 
         edge_options.add_argument("--log-level=3")
+        edge_options.add_argument("--no-sandbox")
+        edge_options.add_argument("--disable-dev-shm-usage")
+        edge_options.add_argument("--disable-extensions")
+        edge_options.add_argument("--disable-logging")
         edge_service = EdgeService(edge_path)
         driver_edge = Edge(service=edge_service, options=edge_options)
         driver_edge.get(item.get('idUser'))
-        time.sleep(5)
-        driver.implicitly_wait(5)
+        time.sleep(10)
+        driver_edge.implicitly_wait(10)
         html = driver_edge.page_source
         match = re.search(r'"userID":"(\d+)"', html)
         if match:
             user_id = match.group(1)
         else:
             user_id = None
-        item['idUser'] = user_id
+        if user_id:
+            item['idUser'] = user_id
         driver_edge.quit()
+        if 'time' in item:
+            try:
+                item['time'] = datetime.datetime.strptime(item['time'], '%Y-%m-%d %H:%M:%S')
+            except ValueError as e:
+                raise DropItem(f"Failed to parse 'time' field: {e}")
         if isinstance(item, CrawlFacebookItem):  
             try:
                 existing_item = self.db[self.mongo_collection].find_one({'idUser': item.get('idUser')})

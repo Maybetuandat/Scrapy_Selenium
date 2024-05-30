@@ -96,3 +96,21 @@
 #         driver.implicitly_wait(10)
 
 
+
+
+  # def start_requests(self):
+    #     yield SeleniumRequest(
+    #         url = self.start_urls[0],
+    #         wait_time = 3,
+    #         callback = self.init_requests,
+    #         meta={'driver': self.driver}
+    #     )
+    # def init_requests(self, response):
+    #     driver = response.meta['driver']
+    #     yield SeleniumRequest(
+    #         url = self.start_urls[1],
+    #         wait_time = 3,
+    #         callback = self.parse_friend,
+    #            dont_filter=True  ,
+    #            meta={'driver': driver}
+    #     )
