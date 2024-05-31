@@ -22,7 +22,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.edge.service import Service as EdgeService
 from shutil import which
 import time
-from crawl_facebook.items import CrawlFacebookItem, CrawlFacebookReactItem
+from crawl_facebook.items import CrawlFacebookItem, CrawlFacebookReactItem, CrawlFacebookCommentItem
 #pipeline của thằng lấy danh sách bạn bè 
 class CrawlFacebookPipeline:
     def __init__(self, mongo_uri, mongo_db, mongo_collection):
@@ -54,8 +54,8 @@ class CrawlFacebookPipeline:
         edge_service = EdgeService(edge_path)
         driver_edge = Edge(service=edge_service, options=edge_options)
         driver_edge.get(item.get('idUser'))
-        time.sleep(10)
-        driver_edge.implicitly_wait(10)
+        time.sleep(3)
+        driver_edge.implicitly_wait(3)
         html = driver_edge.page_source
         match = re.search(r'"userID":"(\d+)"', html)
         if match:
@@ -77,8 +77,8 @@ class CrawlFacebookPipeline:
                     updates = {}
                     if existing_item.get('name') != item.get('name'):
                         updates['name'] = item.get('name')
-                    if existing_item.get('react') and existing_item.get('react') != 0:
-                        updates['react'] = 0
+                    updates['react'] = 0
+                    updates['comment'] = 0
                     if updates:
                         self.db[self.mongo_collection].update_one(
                             {'_id': existing_item['_id']},
@@ -96,6 +96,15 @@ class CrawlFacebookPipeline:
                self.db[self.mongo_collection].update_one(
                     {'_id': existing_item['_id']},
                     {'$inc': {'react': 1}}
+                )
+            else:
+                raise DropItem(f"Missing one of the fields in {item}")
+        elif isinstance(item, CrawlFacebookCommentItem):
+            existing_item = self.db[self.mongo_collection].find_one({'idUser': item.get('idUser')})
+            if existing_item:
+                self.db[self.mongo_collection].update_one(
+                    {'_id': existing_item['_id']},
+                    {'$inc': {'comment': 1}}
                 )
             else:
                 raise DropItem(f"Missing one of the fields in {item}")

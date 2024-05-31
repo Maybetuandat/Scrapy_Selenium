@@ -10,7 +10,10 @@ class CrawlFacebookItem(scrapy.Item):
     idUser = scrapy.Field()
     time = scrapy.Field()
     react = scrapy.Field()
+    comment = scrapy.Field()
 class CrawlFacebookReactItem(scrapy.Item):
+    idUser = scrapy.Field()
+class CrawlFacebookCommentItem(scrapy.Item):
     idUser = scrapy.Field()
     
     
