@@ -50,9 +50,9 @@ class FacebookSpider(scrapy.Spider):
         input_account = WebDriverWait(self.driver, 3).until(
             EC.presence_of_element_located((By.XPATH, "//input[@id='email']"))
         )
-        input_account.send_keys('boxdat123@gmail.com')
+        input_account.send_keys('')
         input_password = self.driver.find_element(By.XPATH, "//input[@id='pass']")
-        input_password.send_keys('123456789aA@')
+        input_password.send_keys('')
         btn_sign = self.driver.find_element(By.XPATH, "//button[@name='login']")
         btn_sign.click()
     def start_requests(self):
